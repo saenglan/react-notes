@@ -1,25 +1,12 @@
 import React from "react";
-import Entry from "./Entry";
-import emojipedia from "../emojipedia";
+import Login from "./Login";
+import Input from "./Input";
 
-function createEmoji(emojipedia) {
-  return (
-    <Entry
-      emoji={emojipedia.emoji}
-      name={emojipedia.name}
-      description={emojipedia.meaning}
-    />
-  );
-}
+var isLoggedIn = false;
 
 function App() {
   return (
-    <div>
-      <h1>
-        <span>emojipedia</span>
-      </h1>
-      <dl className="dictionary">{emojipedia.map(createEmoji)}</dl>
-    </div>
+    <div className="container">{isLoggedIn ? <h1>Hello</h1> : <Login />}</div>
   );
 }
 
