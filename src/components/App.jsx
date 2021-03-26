@@ -1,51 +1,38 @@
 import React, { useState } from "react";
 
 function App() {
-  const [fullName, setFullName] = useState({
-    fName: "",
-    lName: ""
-  });
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
 
   function handleChange(event) {
-    // const newValue = event.target.value;
-    // const inputName = event.target.name;
-    const { value, name } = event.target;
+    const inputItem = event.target.value;
+    setInputText(inputItem);
+  }
 
-    setFullName((prevValue) => {
-      if (name === "fName") {
-        return {
-          fName: value,
-          lName: prevValue.lName
-        };
-      } else if (name === "lName") {
-        return {
-          fName: prevValue.fName,
-          lName: value
-        };
-      }
+  function addItem() {
+    setItems((prevItems) => {
+      return [...prevItems, inputText];
     });
   }
 
   return (
     <div className="container">
-      <h1>
-        Hello {fullName.fName} {fullName.lName}
-      </h1>
-      <form>
-        <input
-          name="fName"
-          onChange={handleChange}
-          placeholder="First Name"
-          value={fullName.fName}
-        />
-        <input
-          name="lName"
-          onChange={handleChange}
-          placeholder="Last Name"
-          value={fullName.lName}
-        />
-        <button>Submit</button>
-      </form>
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={handleChange} type="text" value={inputText} />
+        <button onClick={addItem}>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          {items.map((todoItem) => {
+            return <li>{todoItem}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
